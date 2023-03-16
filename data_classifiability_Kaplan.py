@@ -18,8 +18,8 @@ import multiprocessing
 import sys
 
 year_num = sys.argv[1]
-data_file_path = '/home/julia/Desktop/ENSO_flavors_WAF/stationarity_test/ERSST/ENSO_clustering/data/sst.mon.mean_COBE_2022_KAPLAN_grid.nc'
-output_file_path = '/home/julia/Desktop/ENSO_flavors_WAF/stationarity_test/ERSST/ENSO_clustering/'+str(year_num)+'_year_data_classification_dictionary_COBE.csv'
+data_file_path = '/home/julia/Desktop/ENSO_flavors_WAF/stationarity_test/ERSST/ENSO_clustering/data/sst.mean.anom_Kaplan_2022_KAPLAN_grid.nc'
+output_file_path = '/home/julia/Desktop/ENSO_flavors_WAF/stationarity_test/ERSST/ENSO_clustering/'+str(year_num)+'_year_data_classification_dictionary_Kaplan.csv'
 
 print('Calculating data classifiability for '+str(year_num)+' years')
 print('Dictionary will be saved in: '+output_file_path)
@@ -101,6 +101,8 @@ with multiprocessing.Pool(processes=5) as pool:
 class_data_dict = {}
 for i, result in enumerate(class_data):
     class_data_dict["Worker "+str(i)] = result
+
+(pd.DataFrame(class_data_dict)).to_csv(output_file_path)
 
 #Save dictionary
 (pd.DataFrame(class_data_dict)).to_csv(output_file_path)
