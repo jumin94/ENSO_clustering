@@ -18,8 +18,8 @@ import ML_utilities as mytb
 import concurrent.futures
 
 year_num = 30
-data_file_path = '/home/users/tabu/ENSO_clustering/data/sst.mean.anom_Kaplan_2022_KAPLAN_grid.nc'
-output_file_path = '/home/users/tabu/ENSO_clustering/'+str(year_num)+'_year_noise_classification_dictionary_Kaplan.csv' 
+data_file_path = '/home/julia/Desktop/ENSO_flavors_WAF/stationarity_test/ERSST/ENSO_clustering/data/sst.mean.anom_Kaplan_2022_KAPLAN_grid.nc'
+output_file_path = '/home/julia/Desktop/ENSO_flavors_WAF/stationarity_test/ERSST/ENSO_clustering/'+str(year_num)+'_year_noise_classification_dictionary_Kaplan.csv' 
 
 #FUNCTIONS--------------------------------------------------------------------
 def apply_operation_in_parallel(data, itr, k):
@@ -34,19 +34,18 @@ def apply_operation_in_parallel(data, itr, k):
             cluster=kmeans.fit_predict(data)
             centers[ii]=kmeans.cluster_centers_
 
-        cc=np.zeros((itr,itr)) #correlation matrix
+        cc = np.zeros((itr, itr))
         for ii in range(itr):
-            data1=np.asarray([centers[ii][i] for i in range(k)]).T #iterate over clusters 
-            cc[ii,ii]=np.nan
-            for jj in [jj for jj in range(itr) if jj != ii]:
-                data2=np.asarray([centers[jj][i] for i in range(k)]).T
-
-                #standardizing the data
-                x1=np.mat(scaler.fit_transform(data1))  
-                x2=np.mat(scaler.fit_transform(data2))
-                ACC=(x2.transpose()*x1)/(x1.shape[0]-1.) #rows -> corr of all x1 with each x2. 
-
-                cc[jj,ii]=ACC.max(1).min()
+            for jj in range(ii + 1, itr):  # Only calculate the upper triangle of the matrix
+                data1 = np.asarray([centers[ii][i] for i in range(k)]).T
+                data2 = np.asarray([centers[jj][i] for i in range(k)]).T
+                x1 = scaler.fit_transform(data1.T).T
+                x2 = scaler.fit_transform(data2.T).T
+                ACC = (x2 @ x1.T) / (x1.shape[1] - 1)
+                cc[ii, jj] = ACC.max(1).min()
+        
+        cc += cc.T  # Fill in the lower triangle of the matrix
+        np.fill_diagonal(cc, np.nan)  # Set diagonal to NaN
 
         print('Calculting index')
 
