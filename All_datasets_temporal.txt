@@ -1,0 +1,18 @@
+80 years: minimum agreement percentage: 0.5969049373618276
+ 80 years: minimum agreement percentage: 0.5969049373618276, mean agreement percentage: 
+ 0.6756325227216902, max agreement percentage: 
+ 0.7516580692704495
+ 70 years: minimum agreement percentage: 0.46499631540162123, mean agreement percentage: 0.5858511422254975, max agreement percentage: 
+ 0.7361827560795873
+ 60 years: minimum agreement percentage: 0.5512159174649963, mean agreement percentage: 
+ 0.6107835912552199, max agreement percentage: 
+ 0.759027266028003
+ 50 years: minimum agreement percentage: 0.2328666175386883, mean agreement percentage: 
+ 0.4760501105379514, max agreement percentage: 
+ 0.7921886514369934
+ 40 years: minimum agreement percentage: 0.4591009579955785, mean agreement percentage: 
+ 0.6261360845001228, max agreement percentage: 
+ 0.7929255711127488
+ 30 years: minimum agreement percentage: 0.3507737656595431, mean agreement percentage: 
+ 0.45627609923851636, max agreement percentage: 
+ 0.5799557848194546
