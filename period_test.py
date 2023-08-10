@@ -134,6 +134,7 @@ def correlate_clusters():
             clusters[dataset][i] = clusters[dataset][i].stack(aux=('lon','lat')).values
     correlations_mean =  []
     correlations_min = []
+<<<<<<< HEAD
     correlations_max = []
     dataset_one = dataset_list[0]
     correlations_mean.append(np.mean(np.abs(np.array(correlation_cluster(clusters[dataset_list[2]],clusters[dataset_list[3]])))))
@@ -143,12 +144,24 @@ def correlate_clusters():
         correlations_mean.append(np.mean(np.abs(np.array(correlation_cluster(clusters[dataset_one],clusters[ds])))))
         correlations_min.append(np.min(np.abs(np.array(correlation_cluster(clusters[dataset_one],clusters[ds])))))
         correlations_max.append(np.max(np.abs(np.array(correlation_cluster(clusters[dataset_one],clusters[ds])))))
+=======
+    dataset_one = dataset_list[0]
+    correlations_mean.append(np.mean(np.abs(np.array(correlation_cluster(clusters[dataset_list[2]],clusters[dataset_list[3]])))))
+    correlations_min.append(np.mean(np.abs(np.array(correlation_cluster(clusters[dataset_list[2]],clusters[dataset_list[3]])))))
+    for i,ds in enumerate(['ERSST','HadISST','Kaplan']):	
+        correlations_mean.append(np.mean(np.abs(np.array(correlation_cluster(clusters[dataset_one],clusters[ds])))))
+        correlations_min.append(np.min(np.abs(np.array(correlation_cluster(clusters[dataset_one],clusters[ds])))))
+>>>>>>> 28355fa2bac8c34d1ba9f8045cc9b713f9cc2351
     dataset_two = dataset_list[1]
     for i,ds in enumerate(['HadISST','Kaplan']):
         correlations_mean.append(np.mean(np.abs(np.array(correlation_cluster(clusters[dataset_two],clusters[ds])))))
         correlations_min.append(np.min(np.abs(np.array(correlation_cluster(clusters[dataset_two],clusters[ds])))))
+<<<<<<< HEAD
         correlations_max.append(np.max(np.abs(np.array(correlation_cluster(clusters[dataset_two],clusters[ds])))))
     return correlations_mean,correlations_min,correlations_max
+=======
+    return correlations_mean,correlations_min
+>>>>>>> 28355fa2bac8c34d1ba9f8045cc9b713f9cc2351
 
 
 def time_cluster_agrement(labels_all_datasets):
@@ -168,7 +181,11 @@ def time_cluster_agrement(labels_all_datasets):
 
 
 def plot_clusters(original_grids,cluster_centers,clusters_in_order,values,labels,number): #clusters in order is an array of sorted clusters
+<<<<<<< HEAD
     fig, ax = plt.subplots(8,4,figsize=(20, 15),dpi=300,constrained_layout=True)
+=======
+    fig, ax = plt.subplots(8,4,figsize=(20, 10),dpi=300,constrained_layout=True)
+>>>>>>> 28355fa2bac8c34d1ba9f8045cc9b713f9cc2351
     dataset_list = ['COBE','ERSST','HadISST','Kaplan']
     counter = 0
     for dataset in dataset_list:
@@ -191,6 +208,7 @@ def plot_clusters(original_grids,cluster_centers,clusters_in_order,values,labels
             else:
                 ENSO = 'Neutral'
             (clusters[ii].to_dataset()).to_netcdf('/home/julia.mindlin/ENSO_favors/New_classification_eight_clusters/'+dataset+'_cluster_'+str(i+1)+'.nc')
+<<<<<<< HEAD
             ax[i,counter].tick_params(axis='both', labelsize=16)
             #ax[i,counter].tick_params(axis='y', labelsize=16)
             if counter == 0:
@@ -208,6 +226,21 @@ def plot_clusters(original_grids,cluster_centers,clusters_in_order,values,labels
     cbar = fig.colorbar(im1, ax=ax[:,3])
     cbar.set_label(r'sea surface temperature anomaly (K)',fontsize=20) #rotation= radianes
     cbar.ax.tick_params(axis='both',labelsize=16)
+=======
+            plt.xticks(size=14)
+            plt.yticks(size=14)
+            plt.xlabel('Longitude', fontsize=16)
+            plt.ylabel('Latitude', fontsize=16)
+            if i == 0:
+                ax[i,counter].set_title(dataset+'\n Cluster #'+str(i+1)+' Nino 3.4 $\sigma$: '+str(round(values[dataset][ii],3))+', label:'+ENSO,fontsize=12, loc='left')
+            else:
+                ax[i,counter].set_title('Cluster #'+str(i+1)+' Nino 3.4 $\sigma$: '+str(round(values[dataset][ii],3))+', label:'+ENSO,fontsize=12, loc='left')
+        counter +=1
+    #Add gridlines
+    cbar = fig.colorbar(im1, ax=ax[:,3])
+    cbar.set_label(r'sea surface temperature anomaly (K)',fontsize=14) #rotation= radianes
+    cbar.ax.tick_params(axis='both',labelsize=14)
+>>>>>>> 28355fa2bac8c34d1ba9f8045cc9b713f9cc2351
     fig.savefig('/home/julia.mindlin/ENSO_favors/New_classification_eight_clusters/All_datasets_Kaplan_grid_1942-2022_'+str(number)+'_years.png')
     plt.close()
 
@@ -403,8 +436,13 @@ for y0,number in  zip(years,year_length):
     plt.title(str(number))
     fig.savefig("/home/julia.mindlin/ENSO_favors/New_classification_eight_clusters/time_evolution_"+str(number)+".png")
     f = open("/home/julia.mindlin/ENSO_favors/New_classification_eight_clusters/All_datasets_spatial.txt", "a")
+<<<<<<< HEAD
     spatial_corr_mean, spatial_corr_min, spatial_corr_max  = correlate_clusters()
     f.write(str(number)+' years: minimum of mean correlations'+str(np.min(spatial_corr_mean))+' minimum of minimum correlations: '+str(np.min(spatial_corr_min))+' minimum of maximum correlations: '+str(np.min(spatial_corr_max))+"\n ") #[0])+', '+str(spatial_corr[1])+', '+str(spatial_corr[2])+', '+str(spatial_corr[3])+',  '+str(spatial_corr[4])+', '+str(spatial_corr[5]))
+=======
+    spatial_corr_mean, spatial_corr_min = correlate_clusters()
+    f.write(str(number)+' years: minimum of mean correlations'+str(np.min(spatial_corr_mean))+' minimum of minimum correlations: '+str(np.min(spatial_corr_min))+"\n ") #[0])+', '+str(spatial_corr[1])+', '+str(spatial_corr[2])+', '+str(spatial_corr[3])+',  '+str(spatial_corr[4])+', '+str(spatial_corr[5]))
+>>>>>>> 28355fa2bac8c34d1ba9f8045cc9b713f9cc2351
     f.close()
     spatial_corr_all, pairs = correlate_clusters_detail()
     f = open("/home/julia.mindlin/ENSO_favors/New_classification_eight_clusters/All_datasets_spatial_all.txt", "a")
@@ -415,7 +453,11 @@ for y0,number in  zip(years,year_length):
     f.close()
     agreement = np.array(time_cluster_agrement(labels_all_datasets))
     f = open("/home/julia.mindlin/ENSO_favors/New_classification_eight_clusters/All_datasets_temporal.txt", "a")
+<<<<<<< HEAD
     f.write(str(number)+' years: minimum agreement percentage: '+str(np.min(agreement))+', mean agreement percentage: \n '+str(np.mean(agreement))+', max agreement percentage: \n '+str(np.max(agreement)))
+=======
+    f.write(str(number)+' years: minimum agreement percentage: '+str(np.min(agreement))+'\n ')
+>>>>>>> 28355fa2bac8c34d1ba9f8045cc9b713f9cc2351
     f.close()
     f = open("/home/julia.mindlin/ENSO_favors/New_classification_eight_clusters/All_datasets_temporal_max.txt", "a")
     f.write(str(number)+' years: maxmum agreement percentage: '+str(np.max(agreement))+'\n ')

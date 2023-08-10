@@ -1,0 +1,7 @@
+80 years: minimum of mean correlations0.9130971626250641 minimum of minimum correlations: 0.7713692788367236
+ 70 years: minimum of mean correlations0.8578051498610707 minimum of minimum correlations: 0.5622322093006553
+ 60 years: minimum of mean correlations0.8259222197821666 minimum of minimum correlations: 0.38970784150233606
+ 50 years: minimum of mean correlations0.5801387123269559 minimum of minimum correlations: 0.02695715395079798
+ 40 years: minimum of mean correlations0.8562077844689386 minimum of minimum correlations: 0.5925529001427787
+ 30 years: minimum of mean correlations0.807521456766512 minimum of minimum correlations: 0.19744119253469847
+ 
